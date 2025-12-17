@@ -91,6 +91,19 @@ cat > deployment-policy.json << EOF
     {
       "Effect": "Allow",
       "Action": [
+        "ec2:DescribeAvailabilityZones",
+        "ec2:DescribeRegions",
+        "ec2:DescribeVpcs",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeRouteTables",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeInternetGateways"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
         "ecs:UpdateService",
         "ecs:DescribeServices",
         "ecs:DescribeClusters",
@@ -167,7 +180,9 @@ cat > deployment-policy.json << EOF
       ],
       "Resource": [
         "arn:aws:s3:::cdktoolkit-stagingbucket-*",
-        "arn:aws:s3:::cdktoolkit-stagingbucket-*/*"
+        "arn:aws:s3:::cdktoolkit-stagingbucket-*/*",
+        "arn:aws:s3:::cdk-*-assets-${ACCOUNT_ID}-*",
+        "arn:aws:s3:::cdk-*-assets-${ACCOUNT_ID}-*/*"
       ]
     },
     {
