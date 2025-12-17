@@ -156,6 +156,7 @@ cat > deployment-policy.json << EOF
         "cloudformation:CreateChangeSet",
         "cloudformation:ExecuteChangeSet",
         "cloudformation:DeleteChangeSet",
+        "cloudformation:DescribeChangeSet",
         "cloudformation:GetTemplate",
         "cloudformation:GetStackPolicy",
         "cloudformation:SetStackPolicy",
