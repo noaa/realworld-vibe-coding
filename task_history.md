@@ -186,3 +186,21 @@ CDK 배포 중 `cloudformation:DescribeChangeSet` 권한 부족 에러가 발생
 
 **다음 단계:**
 *   GitHub Actions에서 배포 워크플로우를 다시 **Re-run** 하여 스택이 깨끗하게 생성되는지 확인합니다.
+
+## 2025년 12월 17일 수요일 - 백엔드 헬스 체크 성공 확인
+
+GitHub Actions를 통한 백엔드 배포 완료 후, CloudFront를 통해 서비스의 헬스 체크 엔드포인트에 성공적으로 접근했습니다.
+
+**증상:**
+*   이전 `npm run deploy:dev` (GitHub Actions를 통한 배포) 실행 완료 후, CloudFront 주소 접근 시 `404 Error` 발생.
+
+**조치 내용:**
+*   백엔드 코드(`backend/cmd/server/main.go`) 분석을 통해 헬스 체크 엔드포인트가 `/health`임을 확인했습니다.
+*   `https://<CloudFront_Domain>/health`로 접속 시 `{"status":"ok","service":"realworld-backend"}` 응답을 확인했습니다.
+
+**결과:**
+*   백엔드 서비스가 AWS에 성공적으로 배포되었고, CloudFront를 통해 정상적으로 접근 가능함을 확인했습니다.
+
+**다음 단계:**
+*   프론트엔드를 배포하여 백엔드 API와 연동합니다.
+
