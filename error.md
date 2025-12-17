@@ -1,2 +1,1 @@
-❌  RealWorld failed: AccessDenied: User: arn:aws:sts::036437288093:assumed-role/GitHubActionsRole/GitHubActions-BackendDeploy is not authorized to perform: cloudformation:DeleteChangeSet on resource: arn:aws:cloudformation:ap-northeast-2:036437288093:stack/RealWorld/2aefd7a0-dae6-11f0-96b8-0617c92c60d9 because no identity-based policy allows the cloudformation:DeleteChangeSet action
-Error: Process completed with exit code 1.
+❌  RealWorld failed: AccessDenied: User: arn:aws:sts::036437288093:assumed-role/GitHubActionsRole/GitHubActions-BackendDeploy is not authorized to perform: iam:PassRole on resource: arn:aws:iam::036437288093:role/cdk-hnb659fds-cfn-exec-role-036437288093-ap-northeast-2 because no identity-based policy allows the iam:PassRole action

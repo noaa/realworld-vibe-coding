@@ -121,6 +121,21 @@ CDK 배포 중 `RealWorld` 스택에 대한 `cloudformation:DescribeStacks` 권�
 **다음 단계:**
 *   GitHub Actions에서 실패한 워크플로우를 다시 **Re-run** 합니다.
 
+## 2025년 12월 17일 수요일 - CDK 배포 권한 에러 해결 (iam:PassRole for cdk-* 역할 추가)
+
+CDK 배포 중 `iam:PassRole` 권한 부족으로 인한 `AccessDenied` 에러를 해결했습니다.
+
+**증상:**
+*   `User ... is not authorized to perform: iam:PassRole on resource: ...role/cdk-hnb659fds-cfn-exec-role-...` 에러 발생.
+*   CDK는 CloudFormation 스택 작업 시 내부적으로 `cdk-*` 패턴의 IAM Role을 전달(PassRole)해야 하는데, `GitHubActionsRole`에 해당 권한이 누락됨.
+
+**조치 내용:**
+*   `scripts/setup-oidc.sh` 파일의 `deployment-policy.json` 섹션 내 `iam:PassRole` 리소스 목록에 `arn:aws:iam::${ACCOUNT_ID}:role/cdk-*` 패턴을 추가했습니다.
+*   수정된 스크립트를 실행하여 AWS IAM Role 정책을 업데이트했습니다.
+
+**다음 단계:**
+*   GitHub Actions에서 실패한 워크플로우를 다시 **Re-run** 합니다.
+
 ## 2025년 12월 17일 수요일 - CDK 배포 권한 에러 해결 (CloudFormation ChangeSet 권한 추가)
 
 CDK 배포 과정에서 ChangeSet 삭제 권한 부족으로 인한 `AccessDenied` 에러를 해결했습니다.

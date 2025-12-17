@@ -121,7 +121,8 @@ cat > deployment-policy.json << EOF
       ],
       "Resource": [
         "arn:aws:iam::${ACCOUNT_ID}:role/realworld-*-ecs-task-role",
-        "arn:aws:iam::${ACCOUNT_ID}:role/realworld-*-ecs-execution-role"
+        "arn:aws:iam::${ACCOUNT_ID}:role/realworld-*-ecs-execution-role",
+        "arn:aws:iam::${ACCOUNT_ID}:role/cdk-*"
       ]
     },
     {
