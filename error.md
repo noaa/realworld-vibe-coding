@@ -1,2 +1,2 @@
-❌  RealWorld failed: AccessDenied: User: arn:aws:sts::036437288093:assumed-role/GitHubActionsRole/GitHubActions-BackendDeploy is not authorized to perform: cloudformation:DescribeChangeSet on resource: arn:aws:cloudformation:ap-northeast-2:036437288093:stack/RealWorld/2aefd7a0-dae6-11f0-96b8-0617c92c60d9 because no identity-based policy allows the cloudformation:DescribeChangeSet action
+❌  RealWorld failed: _ToolkitError: The stack named RealWorld failed to deploy: UPDATE_ROLLBACK_COMPLETE
 Error: Process completed with exit code 1.

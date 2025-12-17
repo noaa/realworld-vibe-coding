@@ -168,3 +168,21 @@ CDK 배포 중 `cloudformation:DescribeChangeSet` 권한 부족 에러가 발생
 
 **다음 단계:**
 *   GitHub Actions에서 실패한 워크플로우를 다시 **Re-run** 합니다.
+
+## 2025년 12월 17일 수요일 - CDK 배포 실패 해결 (CloudFormation 스택 재배포)
+
+`UPDATE_ROLLBACK_COMPLETE` 에러로 인한 CDK 배포 실패를 해결하기 위해 CloudFormation 스택을 삭제 후 재배포했습니다.
+
+**증상:**
+*   `_ToolkitError: The stack named RealWorld failed to deploy: UPDATE_ROLLBACK_COMPLETE` 에러 발생.
+*   CloudFormation 이벤트 로그에서 `Unable to retrieve DNSName attribute for AWS::ElasticLoadBalancingV2::LoadBalancer, with error message One or more load balancers not found` 오류 확인.
+*   원인: CDK 스택 상태와 실제 AWS 리소스(LoadBalancer) 간 불일치(Drift) 발생.
+
+**조치 내용:**
+*   꼬인 상태를 해결하기 위해 `RealWorld` CloudFormation 스택을 완전히 삭제했습니다.
+    *   `aws cloudformation delete-stack --stack-name RealWorld`
+    *   `aws cloudformation wait stack-delete-complete --stack-name RealWorld`
+*   스택 삭제 후 GitHub Actions를 통해 처음부터 다시 배포하도록 안내했습니다.
+
+**다음 단계:**
+*   GitHub Actions에서 배포 워크플로우를 다시 **Re-run** 하여 스택이 깨끗하게 생성되는지 확인합니다.
