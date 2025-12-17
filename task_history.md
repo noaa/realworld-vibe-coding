@@ -105,10 +105,18 @@ CDK 배포 시 Custom Resource(Lambda 함수 등) 자산을 S3에 업로드하�
 **다음 단계:**
 *   GitHub Actions에서 실패한 워크플로우를 다시 **Re-run** 하여 배포 성공 여부를 확인합니다.
 
+## 2025년 12월 17일 수요일 - CDK 배포 권한 에러 해결 (CloudFormation 스택 이름 매칭)
 
+CDK 배포 중 `RealWorld` 스택에 대한 `cloudformation:DescribeStacks` 권한 거부(`AccessDenied`) 에러를 해결했습니다.
 
+**증상:**
+*   `User ... is not authorized to perform: cloudformation:DescribeStacks on resource: ...stack/RealWorld/...` 에러 발생.
+*   기존 정책의 리소스 패턴 `RealWorld-*`가 하이픈 없이 정확히 `RealWorld`라는 이름을 가진 스택을 매칭하지 못함.
+
+**조치 내용:**
+*   `scripts/setup-oidc.sh` 파일의 `deployment-policy.json` 섹션 내 CloudFormation 리소스 패턴을 `arn:aws:cloudformation:*:${ACCOUNT_ID}:stack/RealWorld*`로 수정했습니다.
+*   이를 통해 `RealWorld` (접미사 없음) 및 `RealWorld-dev` (접미사 있음) 등 모든 관련 스택을 포괄적으로 허용하게 되었습니다.
+*   수정된 스크립트를 실행하여 AWS IAM Role 정책을 업데이트했습니다.
 
 **다음 단계:**
-*   GitHub Actions에서 실패한 워크플로우를 **Re-run** 해야 합니다.
-
-
+*   GitHub Actions에서 실패한 워크플로우를 다시 **Re-run** 합니다.

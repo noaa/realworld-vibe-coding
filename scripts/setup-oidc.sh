@@ -164,7 +164,7 @@ cat > deployment-policy.json << EOF
       ],
       "Resource": [
         "arn:aws:cloudformation:*:${ACCOUNT_ID}:stack/CDKToolkit/*",
-        "arn:aws:cloudformation:*:${ACCOUNT_ID}:stack/RealWorld-*"
+        "arn:aws:cloudformation:*:${ACCOUNT_ID}:stack/RealWorld*"
       ]
     },
     {
