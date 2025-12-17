@@ -546,3 +546,4 @@ This frontend was developed using:
 ---
 
 **Tech Stack**: React 19 | TypeScript | Vite | Tanstack Query | Zustand | Tailwind CSS | Mantine | Vitest | Playwright | GitHub Pages
+
