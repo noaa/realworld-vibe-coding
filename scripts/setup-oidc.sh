@@ -7,10 +7,10 @@
 set -e
 
 # Configuration
-GITHUB_REPO="Hands-On-Vibe-Coding/realworld-vibe-coding"
+GITHUB_REPO="noaa/realworld-vibe-coding"
 ROLE_NAME="GitHubActionsRole"
 POLICY_NAME="GitHubActionsDeployPolicy"
-ACCOUNT_ID="931016744724"
+ACCOUNT_ID="036437288093"
 
 echo "🔐 Setting up AWS OIDC for GitHub Actions..."
 echo "Repository: $GITHUB_REPO"
@@ -21,7 +21,7 @@ echo "📋 Creating OIDC Identity Provider..."
 if ! aws iam get-open-id-connect-provider --open-id-connect-provider-arn "arn:aws:iam::${ACCOUNT_ID}:oidc-provider/token.actions.githubusercontent.com" 2>/dev/null; then
   aws iam create-open-id-connect-provider \
     --url https://token.actions.githubusercontent.com \
-    --thumbprint-list 6938fd4d98bab03faadb97b34396831e3780aea1 \
+    --thumbprint-list 6938fd4d98bab03faadb97b34396831e3780aea1 1c58a3a8518e8759bf075b76b750d4f2df264fcd \
     --client-id-list sts.amazonaws.com
   echo "✅ OIDC Provider created"
 else
@@ -230,6 +230,6 @@ echo ""
 echo "🎉 Setup complete!"
 echo "📋 Add this to your GitHub repository secrets:"
 echo "   AWS_ROLE_ARN: $ROLE_ARN"
-echo "   AWS_REGION: us-east-1"
+echo "   AWS_REGION: ap-northeast-2"
 echo ""
 echo "🔗 Role ARN: $ROLE_ARN"

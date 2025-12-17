@@ -12,6 +12,7 @@ import { Construct } from 'constructs'
 
 export interface SimpleEcsStackProps extends cdk.StackProps {
   vpc: ec2.Vpc
+  environment: string
 }
 
 export class SimpleEcsStack extends cdk.Stack {
