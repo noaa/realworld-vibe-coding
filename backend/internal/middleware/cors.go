@@ -12,10 +12,10 @@ func CORS(next http.Handler) http.Handler {
 
 		// List of allowed origins
 		allowedOrigins := map[string]bool{
-			"http://localhost:5173":                    true, // Local frontend
-			"http://localhost:4173":                    true, // Local preview
-			"https://noaa.github.io":                   true, // Production frontend
-			"https://dohyunjung.github.io":             true, // Previous frontend (just in case)
+			"http://localhost:5173":        true, // Local frontend
+			"http://localhost:4173":        true, // Local preview
+			"https://noaa.github.io":       true, // Production frontend
+			"https://dohyunjung.github.io": true, // Previous frontend (just in case)
 		}
 
 		// Check if the origin is allowed, otherwise default to "*" (or restrict it)
