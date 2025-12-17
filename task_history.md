@@ -120,3 +120,21 @@ CDK 배포 중 `RealWorld` 스택에 대한 `cloudformation:DescribeStacks` 권�
 
 **다음 단계:**
 *   GitHub Actions에서 실패한 워크플로우를 다시 **Re-run** 합니다.
+
+## 2025년 12월 17일 수요일 - CDK 배포 권한 에러 해결 (CloudFormation ChangeSet 권한 추가)
+
+CDK 배포 과정에서 ChangeSet 삭제 권한 부족으로 인한 `AccessDenied` 에러를 해결했습니다.
+
+**증상:**
+*   `User ... is not authorized to perform: cloudformation:DeleteChangeSet` 에러 발생.
+*   CDK가 배포 후 정리 작업 등을 위해 ChangeSet을 제어해야 하는데 관련 권한이 누락됨.
+
+**조치 내용:**
+*   `scripts/setup-oidc.sh` 파일의 `deployment-policy.json` 섹션 내 CloudFormation 액션 목록에 다음 권한들을 추가했습니다:
+    *   `cloudformation:CreateChangeSet`
+    *   `cloudformation:ExecuteChangeSet`
+    *   `cloudformation:DeleteChangeSet`
+*   수정된 스크립트를 실행하여 AWS IAM Role 정책을 업데이트했습니다.
+
+**다음 단계:**
+*   GitHub Actions에서 실패한 워크플로우를 다시 **Re-run** 합니다.
